@@ -1,11 +1,8 @@
 import Link from "next/link";
 
-import { SignIn, SignOut } from "@/components/auth";
-import { getUserSession } from "@/lib/auth";
 import { server } from "@/lib/trpc/server";
 
 export default async function Home() {
-  const { session } = await getUserSession();
   const example = await server.example.getExample.query();
 
   return (
@@ -39,7 +36,6 @@ export default async function Home() {
           </Link>
         </div>
         <div className="flex flex-col items-center gap-2">
-          {session ? <SignOut /> : <SignIn />}
           <p className="text-white">{example}</p>
         </div>
       </div>

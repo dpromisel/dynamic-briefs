@@ -4,8 +4,6 @@ import { experimental_nextCacheLink as nextCacheLink } from "@trpc/next/app-dir/
 import { experimental_createTRPCNextAppDirServer as createTRPCNextAppDirServer } from "@trpc/next/app-dir/server";
 import SuperJSON from "superjson";
 
-import { db } from "@/db";
-import { getUserSession } from "@/lib/auth";
 import { appRouter } from "@/server";
 
 export const server = createTRPCNextAppDirServer<typeof appRouter>({
@@ -20,10 +18,9 @@ export const server = createTRPCNextAppDirServer<typeof appRouter>({
           revalidate: 1,
           router: appRouter,
           async createContext() {
-            const { session } = await getUserSession();
             return {
-              session,
-              db,
+              session: null,
+              db: null,
               headers: {
                 cookie: cookies().toString(),
                 "x-trpc-source": "rsc-invoke",
