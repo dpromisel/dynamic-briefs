@@ -169,7 +169,7 @@ const brandsData: Brand[] = [
 ];
 
 export default function Chat() {
-  const { completion, setInput, handleSubmit } = useCompletion({
+  const { completion, setInput, handleSubmit, isLoading } = useCompletion({
     api: "/api/completion",
   });
 
@@ -299,8 +299,8 @@ export default function Chat() {
           disabled={!selectedBrand}
         />
 
-        <Button type="submit" className="w-full">
-          Submit
+        <Button type="submit" className="w-full" disabled={isLoading}>
+          {isLoading ? "Generating..." : "Generate"}
         </Button>
       </form>
 
