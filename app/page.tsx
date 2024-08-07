@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useChat, useCompletion } from "ai/react";
+import { useCompletion } from "ai/react";
 import { RocketIcon } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -15,8 +14,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { SelectOrCreate } from "@/components/ui/select-or-create";
-import { Textarea } from "@/components/ui/textarea";
-import { server } from "@/lib/trpc/server";
 
 type Product = {
   name: string;
@@ -172,7 +169,7 @@ const brandsData: Brand[] = [
 ];
 
 export default function Chat() {
-  const { completion, input, setInput, handleSubmit } = useCompletion({
+  const { completion, setInput, handleSubmit } = useCompletion({
     api: "/api/completion",
   });
 

@@ -17,15 +17,15 @@ export const server = createTRPCNextAppDirServer<typeof appRouter>({
         nextCacheLink({
           revalidate: 1,
           router: appRouter,
-          async createContext() {
-            return {
+          createContext() {
+            return Promise.resolve({
               session: null,
               db: null,
               headers: {
                 cookie: cookies().toString(),
                 "x-trpc-source": "rsc-invoke",
               },
-            };
+            });
           },
         }),
       ],
